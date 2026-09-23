@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kinetic Loader - טוען קינטי ב-CSS</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #2c3e50;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        color: white;
+        position: relative;
+      }
+
+      .info-header {
+        position: absolute;
+        top: 30px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 15px 30px;
+        border-radius: 10px;
+        max-width: 600px;
+        line-height: 1.5;
+      }
+
+      .info-header h2 {
+        font-size: 22px;
+        margin-bottom: 6px;
+        color: #ffffff;
+      }
+
+      .info-header p {
+        font-size: 14px;
+        color: #cbd5e1;
+      }
+
+      /* תיבת המכולה הראשית של הטוען */
+      .kinetic {
+        position: relative;
+        height: 80px;
+        width: 80px;
+      }
+
+      /* יצירת שני המשולשים בעזרת אלמנטים מדומים */
+      .kinetic::after,
+      .kinetic::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border: 50px solid transparent;
+        border-bottom-color: #ffffff;
+        animation: rotateA 2s linear infinite 0.5s;
+      }
+
+      .kinetic::before {
+        transform: rotate(90deg);
+        animation: rotateB 2s linear infinite;
+      }
+
+      /* אנימציה למשולש הראשון */
+      @keyframes rotateA {
+        0%,
+        25% {
+          transform: rotate(0deg);
+        }
+        50%,
+        75% {
+          transform: rotate(180deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* אנימציה למשולש השני */
+      @keyframes rotateB {
+        0%,
+        25% {
+          transform: rotate(90deg);
+        }
+        50%,
+        75% {
+          transform: rotate(270deg);
+        }
+        100% {
+          transform: rotate(450deg);
+        }
+      }
+
+      /* כפתור חזרה לתפריט */
+      .nav-bottom {
+        position: absolute;
+        bottom: 30px;
+      }
+
+      .nav-bottom a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 10px 22px;
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+
+      .nav-bottom a:hover {
+        background: rgba(0, 0, 0, 0.6);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="info-header">
+      <h2>פרויקט Kinetic Loader (אנימציית משולשים קינטית)</h2>
+      <p>
+        שני משולשים שנוצרו ב-CSS טהור באמצעות borders, המסתובבים סביב ציר ה-2D
+        בתזמון מדויק ויוצרים אפקט טעינה חלק.
+      </p>
+    </div>
+
+    <!-- אלמנט הטוען -->
+    <div class="kinetic"></div>
+
+    <div class="nav-bottom">
+      <a href="index.html">← חזרה לתפריט הראשי</a>
+    </div>
+  </body>
+</html>

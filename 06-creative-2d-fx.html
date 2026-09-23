@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 2D - אפקטים יצירתיים מתקדמים</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 25px;
+        background: #f4f6fa;
+        color: #2c3e50;
+        text-align: center;
+      }
+
+      .lesson-card {
+        background: white;
+        border-right: 5px solid #40739e;
+        padding: 15px 25px;
+        margin-bottom: 35px;
+        text-align: right;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+      .lesson-card h2 {
+        margin: 0 0 10px 0;
+        color: #40739e;
+      }
+
+      .grid-demos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: white;
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 270px;
+      }
+
+      .card h3 {
+        font-size: 16px;
+        color: #1a237e;
+        direction: ltr;
+        margin: 0 0 15px 0;
+      }
+
+      .card p {
+        font-size: 13.5px;
+        color: #64748b;
+        margin: 15px 0 0 0;
+        line-height: 1.4;
+      }
+
+      /* -------------------------------------------------------------
+       1. מכונת כתיבה צעד-אחר-צעד (Typewriter עם steps)
+    ------------------------------------------------------------- */
+      .typewriter-text {
+        width: 13ch;
+        overflow: hidden;
+        white-space: nowrap;
+        border-left: 2px solid #2c3e50;
+        font-family: monospace;
+        font-size: 20px;
+        animation:
+          typing 3s steps(13) infinite alternate,
+          blink 0.75s step-end infinite;
+      }
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 13ch;
+        }
+      }
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+
+      /* -------------------------------------------------------------
+       2. ציור קו SVG עצמי (Line Drawing עם stroke-dashoffset)
+    ------------------------------------------------------------- */
+      .svg-draw {
+        width: 80px;
+        height: 80px;
+      }
+      .svg-draw circle {
+        fill: none;
+        stroke: #40739e;
+        stroke-width: 6;
+        stroke-dasharray: 250;
+        stroke-dashoffset: 250;
+        animation: draw 2.5s ease-in-out infinite alternate;
+      }
+      @keyframes draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      /* -------------------------------------------------------------
+       3. גליץ' דיגיטלי (Glitch בדו-ממד)
+    ------------------------------------------------------------- */
+      .glitch-text {
+        font-size: 24px;
+        font-weight: 900;
+        color: #1a2a4b;
+        position: relative;
+        display: inline-block;
+        animation: glitch-anim 1.5s infinite steps(2);
+      }
+      @keyframes glitch-anim {
+        0% {
+          transform: translate(0);
+          text-shadow: none;
+        }
+        20% {
+          transform: translate(-3px, 2px);
+          text-shadow:
+            2px 0 red,
+            -2px 0 cyan;
+        }
+        40% {
+          transform: translate(3px, -1px);
+          text-shadow:
+            -2px 0 red,
+            2px 0 cyan;
+        }
+        60% {
+          transform: translate(-2px, -2px);
+          text-shadow:
+            2px 0 red,
+            -2px 0 cyan;
+        }
+        80% {
+          transform: translate(2px, 1px);
+          text-shadow:
+            -2px 0 red,
+            2px 0 cyan;
+        }
+        100% {
+          transform: translate(0);
+          text-shadow: none;
+        }
+      }
+
+      /* -------------------------------------------------------------
+       4. טקסט עם מעבר צבע מונפש (Gradient Text Shift)
+    ------------------------------------------------------------- */
+      .gradient-text {
+        font-size: 26px;
+        font-weight: 800;
+        background: linear-gradient(120deg, #ff7675, #6c5ce7, #00cec9, #ff7675);
+        background-size: 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient-flow 3s linear infinite;
+      }
+      @keyframes gradient-flow {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+
+      /* -------------------------------------------------------------
+       5. אקורדיון גמיש (Elastic Expand)
+    ------------------------------------------------------------- */
+      .accordion-box {
+        width: 140px;
+        height: 60px;
+        background-color: #27ae60;
+        color: white;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      }
+      .accordion-box:hover {
+        transform: scaleX(1.4) scaleY(1.15);
+      }
+
+      /* -------------------------------------------------------------
+       6. רדאר / סורק 2D (Conic Radar Sweep)
+    ------------------------------------------------------------- */
+      .radar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 2px solid #34495e;
+        background: conic-gradient(
+          from 0deg,
+          rgba(64, 115, 158, 0.6) 0deg,
+          transparent 60deg,
+          transparent 360deg
+        );
+        animation: sweep 2s linear infinite;
+      }
+      @keyframes sweep {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .nav {
+        margin-top: 40px;
+      }
+      .nav a {
+        text-decoration: none;
+        color: #40739e;
+        font-weight: bold;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lesson-card">
+      <h2>6. אנימציות 2D מתקדמות ויצירתיות</h2>
+      <p>
+        שילוב טכניקות מודרניות כגון פונקציות צעד (<code>steps</code>), הנפשת
+        קווי SVG, שיפועי צבע דינמיים וסורקים דו-ממדיים ללא JavaScript:
+      </p>
+    </div>
+
+    <div class="grid-demos">
+      <div class="card">
+        <h3>steps() Typewriter</h3>
+        <div class="typewriter-text">Hello Students!</div>
+        <p>אפקט הקלדה מכני אות אחר אות בעזרת חלוקת תנועה צעד-אחר-צעד ב-CSS.</p>
+      </div>
+
+      <div class="card">
+        <h3>SVG Stroke Animation</h3>
+        <svg class="svg-draw" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" />
+        </svg>
+        <p>ציור קווים רציף של איורים וצורות וקטוריות ע"י משחק ב-dashoffset.</p>
+      </div>
+
+      <div class="card">
+        <h3>2D Glitch Effect</h3>
+        <div class="glitch-text">CYBERPUNK</div>
+        <p>
+          הדמיית שיבוש מסך דיגיטלי ע"י הזזת ציר (translate) ופיצול צבעי צל
+          (shadows).
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Flowing Gradient Text</h3>
+        <div class="gradient-text">COLOR WAVE</div>
+        <p>טקסט שקוף עם רקע גרדיאנט שזז ברקע ויוצר גלי צבע חיים.</p>
+      </div>
+
+      <div class="card">
+        <h3>Elastic Hover (Bezier)</h3>
+        <div class="accordion-box">העבר עכבר!</div>
+        <p>
+          מתיחה אלסטית וקפיצית (Overshoot) המושגת באמצעות עקומת cubic-bezier
+          ייחודית.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Conic 2D Radar</h3>
+        <div class="radar"></div>
+        <p>
+          סורק רדאר המבוסס על מעבר צבע קוני (conic-gradient) וסיבוב דו-ממדי.
+        </p>
+      </div>
+    </div>
+
+    <div class="nav"><a href="index.html">← חזרה לתפריט הראשי</a></div>
+  </body>
+</html>

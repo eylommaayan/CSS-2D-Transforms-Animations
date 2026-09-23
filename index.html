@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>מדריך CSS 2D Transforms & Animations לחוג</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 30px;
+        background-color: #f7f9fc;
+        color: #2c3e50;
+      }
+      h1 {
+        margin-bottom: 8px;
+      }
+      .grid-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 15px;
+        margin-top: 25px;
+      }
+      .grid-links a {
+        background: white;
+        padding: 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #1a237e;
+        font-weight: bold;
+        border: 1px solid #dcdfe6;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        transition: 0.2s;
+      }
+      .grid-links a:hover {
+        background: #40739e;
+        color: white;
+        border-color: #40739e;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>מדריך CSS 2D Transforms & Animations אינטראקטיבי</h1>
+    <p>בחר שיעור מתוך תוכן העניינים כדי לצפות בהדגמה ובהסבר המלא:</p>
+
+    <div class="grid-links">
+      <a href="01-transforms-basics.html"
+        >1. ארבעת הבסיסים (Scale, Translate, Rotate, Skew)</a
+      >
+      <a href="02-transform-origin.html">2. ציר סיבוב: transform-origin</a>
+      <a href="03-advanced-2d-effects.html"
+        >3. אפקטי 2D מתקדמים (היפוך, שילובים, מטריצה)</a
+      >
+      <a href="04-kinetic-loader.html"
+        >4. פרויקט מעשי: Kinetic Loader (אנימציית משולשים)</a
+      >
+      <a href="05-more-2d-animations.html"
+        >5. אנימציות 2D נוספות (Pulse, Bounce, Shimmer, Morphing)</a
+      >
+      <a href="06-creative-2d-fx.html"
+        >6. אנימציות יצירתיות (Typewriter, SVG Draw, Glitch, Radar)</a
+      >
+    </div>
+  </body>
+</html>

@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>סוגי אנימציות 2D נוספים</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 25px;
+        background: #f4f6fa;
+        color: #2c3e50;
+        text-align: center;
+      }
+
+      .lesson-card {
+        background: white;
+        border-right: 5px solid #40739e;
+        padding: 15px 25px;
+        margin-bottom: 35px;
+        text-align: right;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+      .lesson-card h2 {
+        margin: 0 0 10px 0;
+        color: #40739e;
+      }
+
+      .grid-demos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: white;
+        padding: 25px 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 260px;
+      }
+
+      .card h3 {
+        font-size: 17px;
+        color: #1a237e;
+        direction: ltr;
+        margin: 0 0 15px 0;
+      }
+
+      .card p {
+        font-size: 13.5px;
+        color: #64748b;
+        margin: 15px 0 0 0;
+        line-height: 1.4;
+      }
+
+      /* -------------------------------------------------------------
+       1. פולס וגלי הד (Ripple / Pulse)
+    ------------------------------------------------------------- */
+      .pulse-btn {
+        position: relative;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: #40739e;
+        border: none;
+        cursor: pointer;
+      }
+      .pulse-btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        border: 3px solid #40739e;
+        animation: ripple 1.6s ease-out infinite;
+      }
+      @keyframes ripple {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.9);
+          opacity: 0;
+        }
+      }
+
+      /* -------------------------------------------------------------
+       2. אנימציית קפיצה פיזיקלית (Bounce)
+    ------------------------------------------------------------- */
+      .bounce-ball {
+        width: 60px;
+        height: 60px;
+        background: #e67e22;
+        border-radius: 50%;
+        animation: bounce 1.1s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0) scale(1.15, 0.85);
+        }
+        50% {
+          transform: translateY(-70px) scale(0.9, 1.1);
+        }
+      }
+
+      /* -------------------------------------------------------------
+       3. מסלול מעגלי בדו-ממד (2D Orbit)
+    ------------------------------------------------------------- */
+      .orbit-container {
+        width: 100px;
+        height: 100px;
+        border: 1px dashed #bdc3c7;
+        border-radius: 50%;
+        position: relative;
+        animation: spin-orbit 3s linear infinite;
+      }
+      .planet {
+        width: 20px;
+        height: 20px;
+        background: #27ae60;
+        border-radius: 50%;
+        position: absolute;
+        top: -10px;
+        left: calc(50% - 10px);
+      }
+      @keyframes spin-orbit {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* -------------------------------------------------------------
+       4. נצנוץ שלד טעינה (Skeleton Shimmer)
+    ------------------------------------------------------------- */
+      .shimmer-box {
+        width: 150px;
+        height: 70px;
+        background: #e2e8f0;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+      }
+      .shimmer-box::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.7),
+          transparent
+        );
+        transform: translateX(-100%);
+        animation: shimmer 1.5s infinite;
+      }
+      @keyframes shimmer {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      /* -------------------------------------------------------------
+       5. מטוטלת תלויה (Pendulum / Swing)
+    ------------------------------------------------------------- */
+      .swing-box {
+        width: 80px;
+        height: 80px;
+        background: #8e44ad;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border-radius: 6px;
+        transform-origin: top center;
+        animation: swing 2s ease-in-out infinite;
+      }
+      @keyframes swing {
+        0%,
+        100% {
+          transform: rotate(20deg);
+        }
+        50% {
+          transform: rotate(-20deg);
+        }
+      }
+
+      /* -------------------------------------------------------------
+       6. גזירה וגילוף צורות (Clip-Path Morphing)
+    ------------------------------------------------------------- */
+      .morph-shape {
+        width: 80px;
+        height: 80px;
+        background: #e74c3c;
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        animation: morph 2.5s ease-in-out infinite alternate;
+      }
+      @keyframes morph {
+        0% {
+          clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+          transform: rotate(0deg);
+        }
+        100% {
+          clip-path: polygon(
+            25% 0%,
+            75% 0%,
+            100% 50%,
+            75% 100%,
+            25% 100%,
+            0% 50%
+          );
+          transform: rotate(180deg);
+        }
+      }
+
+      .nav {
+        margin-top: 40px;
+      }
+      .nav a {
+        text-decoration: none;
+        color: #40739e;
+        font-weight: bold;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lesson-card">
+      <h2>סוגי אנימציות 2D מתקדמות ב-CSS</h2>
+      <p>
+        אנימציות דו-ממדיות עמוקות שנשענות על שילוב של <code>transform</code>,
+        פונקציות תזמון מותאמות אישית (cubic-bezier), מסכות צורה ואלמנטים מדומים
+        (<code>::before</code> / <code>::after</code>):
+      </p>
+    </div>
+
+    <div class="grid-demos">
+      <!-- 1 -->
+      <div class="card">
+        <h3>Pulse / Ripple</h3>
+        <button class="pulse-btn"></button>
+        <p>גלי הד מתרחבים ב-2D (נפוץ בלחצני מצוקה, לייב, והתראות קוליות).</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="card">
+        <h3>Physics Bounce</h3>
+        <div class="bounce-ball"></div>
+        <p>
+          קפיצה עם עיוות פגיעה (Squash & Stretch) המדמה פיזיקה של כדור אלסטי.
+        </p>
+      </div>
+
+      <!-- 3 -->
+      <div class="card">
+        <h3>2D Orbit</h3>
+        <div class="orbit-container">
+          <div class="planet"></div>
+        </div>
+        <p>תנועה מעגלית של עצם סביב ציר בעזרת סיבוב מכולה חיצונית.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="card">
+        <h3>Shimmer Effect</h3>
+        <div class="shimmer-box"></div>
+        <p>
+          הזזת שכבת אור על ציר X לטעינת כרטיסיות (Skeleton Loaders של
+          YouTube/Facebook).
+        </p>
+      </div>
+
+      <!-- 5 -->
+      <div class="card">
+        <h3>Pendulum Swing</h3>
+        <div class="swing-box">תלוי</div>
+        <p>
+          אפקט שלט תלוי או מטוטלת ע"י העברת <code>transform-origin</code> לחלק
+          העליון המרכזי.
+        </p>
+      </div>
+
+      <!-- 6 -->
+      <div class="card">
+        <h3>Shape Morphing</h3>
+        <div class="morph-shape"></div>
+        <p>
+          שינוי צורה דו-ממדי (מעוין למשושה) בעזרת אנימציית נקודות
+          ב-<code>clip-path</code>.
+        </p>
+      </div>
+    </div>
+
+    <div class="nav"><a href="index.html">← חזרה לתפריט הראשי</a></div>
+  </body>
+</html>

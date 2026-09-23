@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS 2D - אפקטים מתקדמים</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f4f6fa;
+        color: #2c3e50;
+        text-align: center;
+      }
+
+      .lesson-card {
+        background: white;
+        border-right: 5px solid #40739e;
+        padding: 15px 25px;
+        margin-bottom: 30px;
+        text-align: right;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+      .lesson-card h2 {
+        margin: 0 0 10px 0;
+        color: #40739e;
+      }
+
+      .grid-effects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 25px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 240px;
+      }
+
+      .card h3 {
+        font-size: 16px;
+        color: #1a237e;
+        direction: ltr;
+        margin-bottom: 15px;
+      }
+
+      .box {
+        width: 110px;
+        height: 110px;
+        background-color: #40739e;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 16px;
+        border-radius: 8px;
+        transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+      }
+
+      /* אפקט 1: היפוך מראה אופקי (Mirror) בעזרת scaleX(-1) */
+      .flip-h:hover {
+        transform: scaleX(-1);
+      }
+
+      /* אפקט 2: היפוך מראה אנכי (Flip Upside Down) בעזרת scaleY(-1) */
+      .flip-v:hover {
+        transform: scaleY(-1);
+      }
+
+      /* אפקט 3: קפיצה קלאסית של כפתור (הזזה למעלה + הגדלה) */
+      .lift-up:hover {
+        transform: translateY(-15px) scale(1.08);
+      }
+
+      /* אפקט 4: שילוב סיבוב, הגדלה והטיה בו-זמנית */
+      .combo:hover {
+        transform: rotate(45deg) scale(0.85) skewX(10deg);
+      }
+
+      /* אפקט 5: תנועת דחיפה פנימה בלחיצה (Active Button Press) */
+      .press:active {
+        transform: scale(0.92);
+      }
+
+      /* אפקט 6: רעידת תשומת לב (Wiggle) */
+      .wiggle:hover {
+        animation: wiggle-anim 0.4s ease infinite;
+      }
+
+      @keyframes wiggle-anim {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(-8deg);
+        }
+        75% {
+          transform: rotate(8deg);
+        }
+      }
+
+      .card p {
+        font-size: 13.5px;
+        color: #64748b;
+        margin-top: 15px;
+        line-height: 1.4;
+      }
+
+      .nav {
+        margin-top: 40px;
+      }
+      .nav a {
+        text-decoration: none;
+        color: #40739e;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lesson-card">
+      <h2>3. אפקטי 2D מתקדמים (בלי ספריות חיצוניות!)</h2>
+      <p>
+        באמצעות שילוב של טרנספורמציות שונות באותה פקודה אפשר לייצר חוויות ממשק
+        (UI/UX) מקצועיות:
+      </p>
+    </div>
+
+    <div class="grid-effects">
+      <div class="card">
+        <h3>scaleX(-1)</h3>
+        <div class="box flip-h">היפוך ↔</div>
+        <p>אפקט מראה אופקי: הופך את האלמנט ימין-שמאל.</p>
+      </div>
+
+      <div class="card">
+        <h3>scaleY(-1)</h3>
+        <div class="box flip-v">היפוך ↕</div>
+        <p>היפוך אנכי: הופך את האלמנט מהראש לרגליים.</p>
+      </div>
+
+      <div class="card">
+        <h3>translateY(-15px) scale(1.08)</h3>
+        <div class="box lift-up">התרוממות 🚀</div>
+        <p>אפקט כרטיס מתרומם קלאסי של ממשקי מודרניים.</p>
+      </div>
+
+      <div class="card">
+        <h3>rotate + scale + skew</h3>
+        <div class="box combo">משולב ✨</div>
+        <p>שרשור של שלוש פקודות ברווח בתוך אותו מאפיין transform.</p>
+      </div>
+
+      <div class="card">
+        <h3>:active scale(0.92)</h3>
+        <div class="box press">לחץ עליי! 👇</div>
+        <p>תחושת לחיצה פיזית של כפתור כשלוחצים עליו עם העכבר.</p>
+      </div>
+
+      <div class="card">
+        <h3>@keyframes + rotate</h3>
+        <div class="box wiggle">רעידה 🔔</div>
+        <p>אנימציית נענוע לתשומת לב (כמו פעמון התראות).</p>
+      </div>
+    </div>
+
+    <div class="nav"><a href="index.html">← חזרה לתפריט הראשי</a></div>
+  </body>
+</html>

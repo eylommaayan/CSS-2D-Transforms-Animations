@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS transform-origin</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f4f6fa;
+        color: #2c3e50;
+        text-align: center;
+      }
+
+      .lesson-card {
+        background: white;
+        border-right: 5px solid #40739e;
+        padding: 15px 25px;
+        margin-bottom: 30px;
+        text-align: right;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      }
+      .lesson-card h2 { margin: 0 0 10px 0; color: #40739e; }
+
+      .images-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        margin: 40px 0;
+      }
+
+      .cat-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      }
+
+      img {
+        width: 280px;
+        height: 190px;
+        object-fit: cover;
+        display: block;
+        border-radius: 8px;
+        transition: transform 1s ease;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      }
+
+      /* חתול ראשון: סיבוב סביב המרכז (ברירת מחדל - 50% 50%) */
+      .first:hover {
+        transform: rotate(30deg);[cite: 25]
+      }
+
+      /* חתול שני: סיבוב מפינה שמאלית עליונה (top left) */
+      .second {
+        transform-origin: top left;[cite: 25]
+      }
+      .second:hover {
+        transform: rotate(30deg);[cite: 25]
+      }
+
+      .nav { margin-top: 40px; }
+      .nav a { text-decoration: none; color: #40739e; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <div class="lesson-card">
+      <h2>2. בשביל להזיז מזווית אחרת: transform-origin</h2>
+      <p>
+        כברירת מחדל, כל אלמנט ב-CSS מסתובב סביב נקודת המרכז שלו (<code
+          >center center</code
+        >
+        או <code>50% 50%</code>)[cite: 25].
+      </p>
+      <p>
+        באמצעות <code>transform-origin</code> אפשר לקבוע את "המסמר" שמסביבו
+        האלמנט יסתובב – למשל: <code>top left</code> (פינה עליונה שמאלית),
+        <code>bottom right</code>, או בפיקסלים/אחוזים מדויקים[cite: 25]!
+      </p>
+    </div>
+
+    <div class="images-wrapper">
+      <div class="cat-card">
+        <h3>חתול 1: סיבוב רגיל סביב המרכז (rotate 30deg)</h3>
+        <img
+          src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=500&q=80"
+          alt="Cat 1"
+          class="first"
+        />
+      </div>
+
+      <div class="cat-card">
+        <h3>חתול 2: סיבוב מפינה שמאלית עליונה (transform-origin: top left)</h3>
+        <img
+          src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=500&q=80"
+          alt="Cat 2"
+          class="second"
+        />
+      </div>
+    </div>
+
+    <div class="nav"><a href="index.html">← חזרה לתפריט הראשי</a></div>
+  </body>
+</html>
